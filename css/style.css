@@ -58,12 +58,8 @@
       transition: background 300ms ease;
     }
 
-    /* Navbar layout: three-column grid (left logos, centered title, right logo) */
-    /* Header fully transparent over the background (no overlay, no shadow or blur) */
-    .navbar{ display:grid; grid-template-columns: max-content 1fr max-content; align-items:center; gap:64px; padding:16px 40px; min-height:120px; z-index:10; background: transparent; }
-    .nav-left, .nav-right{ display:flex; gap:10px; align-items:center; }
-    .nav-left{ justify-self:start; }
-    .nav-right{ justify-self:end; }
+    .navbar{ display:flex; align-items:center; justify-content:center; gap:24px; padding:16px 20px; min-height:auto; z-index:10; background: transparent; flex-wrap:nowrap; }
+    .nav-left, .nav-right{ display:flex; gap:10px; align-items:center; flex-shrink:0; }
     .header-logo{ max-width:180px; width:auto; height:auto; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6)); }
     .ui-panel{ width:100%; max-width: calc(var(--max-width) - 80px); background: var(--panel-bg); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius:12px; padding:14px; box-shadow:0 12px 36px rgba(0,0,0,0.6); margin-bottom:18px; border:1px solid rgba(255,255,255,0.04); position:relative; overflow:hidden; }
     /* subtle signature band at top of panel */
@@ -73,11 +69,11 @@
     .bg-active{ outline: 2px solid rgba(255,255,255,0.14); box-shadow: 0 6px 18px rgba(0,0,0,0.32); }
     h1{
       color: var(--accent);
-      margin: 0;
-      font-size: 2.1rem; /* increased for stronger visual hierarchy */
+      margin: 0 32px;
+      font-size: 2.1rem;
       text-align:center;
-      grid-column:2 / 3;
-      letter-spacing: 0.6px; /* slightly tighter tracking for Ubuntu */
+      flex: 1;
+      letter-spacing: 0.6px;
       text-shadow: 0 1px 0 rgba(0,0,0,0.35);
     }
     /* site title style - match track-name typography */
@@ -320,40 +316,23 @@
 
 
     @media (max-width: 1024px){
-      h1{ font-size: 1.6rem; }
-      button{ font-size: 1.1em; padding: 0 2.2em; height:56px; }
+      h1{ font-size: 1.5rem; margin: 0 24px; }
+      button{ font-size: 1.1em; padding: 0 1.2em; height:56px; }
       table{ font-size: .85em; }
       td{ padding:6px; }
-      .wrapper{
-        flex-direction: column;
-        align-items: stretch;
-      }
-    .preview{
-        max-width: 100%;
-        min-height: 200px;
-      }
-      /* Hide logos on small viewports to avoid overlap */
-      #logoKDUAlt, #logoKDU, #logoMarioAniv { display:none !important; }
-      .navbar{ padding:12px 18px; }
-      .header-logo{ width:64px !important; }
-      .header-logo.left, .header-logo.right{ position:static; }
+      .navbar{ gap:24px; padding:8px 16px; }
+      .nav-left, .nav-right{ display:flex !important; }
+      .header-logo{ max-width:120px !important; }
+      .wrapper{ flex-direction: column; align-items: stretch; }
+      .preview{ max-width: 100%; min-height: 200px; }
       .ui-panel{ padding:10px; }
     }
 
-    @media (max-width: 700px){
+    @media (max-width: 600px){
       body{ padding:12px; }
-      .navbar{
-        grid-template-columns: 1fr;
-        gap:10px;
-        min-height:auto;
-        padding:10px 0;
-      }
+      .navbar{ flex-direction:column; gap:6px; padding:6px 0; }
       .nav-left, .nav-right{ display:none; }
-      h1{
-        grid-column:auto;
-        font-size: 1.25rem;
-        line-height:1.1;
-      }
+      h1{ flex:none; font-size: 1.1rem; line-height:1.1; }
       .actions{
         flex-direction:column;
         width:100%;

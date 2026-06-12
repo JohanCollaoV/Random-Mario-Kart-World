@@ -10,18 +10,21 @@
   to test registration and offline behavior.
 */
 
-const CACHE_NAME = 'randomizador-cache-v3';
+const CACHE_NAME = 'randomizador-cache-v4';
 const PRECACHE_ASSETS = [
   'index.html',
   'manifest.json',
+  'css/style.css',
+  'js/data.js',
+  'js/app.js',
+  'js/sw-register.js',
   'assets/images/icons/icon-192.png',
   'assets/images/icons/icon-512.png',
   'assets/images/backgrounds/backgroundfinal.png',
   'assets/images/logos/kdu-logo_alt.png',
   'assets/images/logos/logokdu.textwhite.png',
   'assets/images/logos/marioaniversario.trim.png',
-  'assets/images/icons/icon-512.png',
-  // Fonts (added for offline use)
+  'assets/images/tracks/mcflurry.png',
   'assets/fonts/FredokaOne-Regular.woff2',
   'assets/fonts/PressStart2P-Regular.woff2'
 ];
@@ -100,10 +103,13 @@ self.addEventListener('fetch', event => {
   if(req.mode === 'navigate'){
     event.respondWith(
       fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
-        return res;
-      }).catch(()=> caches.match('index.html'))
+        if(res.status === 200){
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
+          return res;
+        }
+        throw new Error('non-200');
+      }).catch(()=> caches.match('index.html').then(r => r || caches.match('/')))
     );
     return;
   }
