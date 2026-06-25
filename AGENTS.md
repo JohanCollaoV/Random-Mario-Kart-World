@@ -9,7 +9,7 @@ App web progresiva (PWA) para sortear pistas de **Mario Kart World** al azar. Id
 - **No hacer git push ni merge sin preguntar**: Siempre pregunta antes de pushear o mergear ramas
 - **No instalar dependencias**: No instales paquetes npm, pip, apt, etc sin preguntar
 - **Explicar el plan primero**: Antes de cambios grandes, explica que vas a hacer y espera mi confirmacion
-- **Leer el contexto primero**: Antes de modificar un archivo, leelo completo para entender el contexto
+
 
 ## Caracteristicas
 
