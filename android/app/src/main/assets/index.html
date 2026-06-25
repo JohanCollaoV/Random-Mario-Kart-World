@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Randomizador de Pistas - Mario Kart World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts embedded locally for offline use -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e53935">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header: logo + name -->
+  <header class="navbar">
+    <div class="nav-left">
+      <img id="logoKDU" class="header-logo" src="assets/images/logos/kdu-logo_alt.png" alt="Logo KDU" onerror="this.style.display='none'" />
+    </div>
+    <h1 class="site-title" style="margin:0; font-size:2.3rem; color:#fff; letter-spacing:0.6px;">Random pistas KDU</h1>
+    <div class="nav-right"><img id="logoMarioAniv" class="header-logo" src="assets/images/logos/marioaniversario.trim.png" alt="Logo Aniversario Mario" onerror="this.style.display='none'" /></div>
+  </header>
+
+  <main class="main-content" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+    <!-- Background fixed to final (no selector) -->
+    <div style="height:6px; margin-bottom:8px;"></div>
+
+    <div class="ui-panel">
+      <div class="actions">
+    <button id="btnRandom" onclick="sortearPista()" aria-label="Seleccionar pista">
+      <!-- Inline SVG: stylized dice (bigger for touch) -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:10px;">
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#ffffff" stroke="#000" stroke-opacity="0.08"></rect>
+        <circle cx="7" cy="7" r="1.8" fill="#333"></circle>
+        <circle cx="12" cy="12" r="1.8" fill="#333"></circle>
+        <circle cx="17" cy="17" r="1.8" fill="#333"></circle>
+      </svg>
+      <span style="font-weight:700;">Selecciona pista</span>
+    </button>
+
+    <button id="btnReset" onclick="confirmReset()" aria-label="Reiniciar lista" style="background:var(--accent);">
+      <!-- Inline SVG: Bowser-inspired skull (stylized, non-licensed generic) -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
+        <path d="M12 2c-1.5 0-2.8.9-3.4 2.2C7.6 4 6 5 6 7v3c0 1.7.9 3.2 2.3 4 -.1.3-.3.7-.3 1.1 0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2 0-.4-.1-.8-.3-1.1C17.1 13.2 18 11.7 18 10V7c0-2-1.6-3-2.6-2.8C14.8 2.9 13.5 2 12 2z" fill="#fff"/>
+        <circle cx="9" cy="11" r="1" fill="#b71c1c"></circle>
+        <circle cx="15" cy="11" r="1" fill="#b71c1c"></circle>
+      </svg>
+      Reiniciar Lista
+    </button>
+      </div>
+
+      <div class="wrapper">
+      <table id="tablaPistas"></table>
+
+      <!-- Preview moved below table for horizontal tablet layout -->
+      <div id="previewBox" class="preview" aria-live="polite" aria-atomic="true">
+        <div id="placeholder" class="placeholder">
+          <img src="assets/images/logos/kdu-logo_alt.png" alt="KDU Logo" class="placeholder-logo" />
+          <div class="placeholder-text">Selecciona una pista</div>
+        </div>
+        <div id="selectedPreview" class="selected-preview">
+          <img id="preview" src="" alt="" style="display:none;" loading="lazy" />
+          <div id="previewLabel" class="preview-label" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- legend removed -->
+      </div>
+    </div>
+  </main>
+
+  <footer style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:18px 12px; box-sizing:border-box;">
+    <div class="footer-center" style="flex:1; text-align:center; color:rgba(255,255,255,0.7);">&copy; KDU - Randomizador</div>
+  </footer>
+
+  <!-- Mode toggle - iOS style -->
+  <div id="modeToggle" class="mode-toggle" role="switch" aria-checked="false" tabindex="0">
+    <span id="modeLabel" class="mode-label">Modo Nintendo</span>
+    <span class="mode-switch"><span class="mode-knob"></span></span>
+  </div>
+
+  <!-- Modal confirm for reset -->
+  <div id="resetModal" style="display:none; position:fixed; left:0;top:0;right:0;bottom:0; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+    <div style="background:#fff; padding:18px; border-radius:10px; max-width:320px; text-align:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
+      <div style="font-weight:700; margin-bottom:8px;">¿Reiniciar lista?</div>
+      <div style="margin-bottom:14px; color:#555;">Se borrará el progreso actual. ¿Confirmas?</div>
+      <div style="display:flex; gap:8px; justify-content:center;">
+        <button id="confirmYes" style="background:#d32f2f; padding:.6em 1em; border-radius:8px; color:#fff; border:none;">Reiniciar</button>
+        <button id="confirmNo" style="background:#eee; padding:.6em 1em; border-radius:8px; color:#333; border:none;">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal no more tracks -->
+  <div id="noMoreModal" style="display:none; position:fixed; left:0;top:0;right:0;bottom:0; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+    <div style="background:#fff; padding:18px; border-radius:10px; max-width:340px; text-align:center; box-shadow:0 6px 24px rgba(0,0,0,.25);">
+      <div style="font-size:1.1rem; font-weight:700; margin-bottom:10px; color:#000;">No quedan más pistas aweonao</div>
+      <div style="margin-bottom:14px; color:#555;">¿Quieres reiniciar?</div>
+      <div style="display:flex; gap:8px; justify-content:center;">
+        <button id="noMoreReiniciar" style="background:#d32f2f; padding:.6em 1em; border-radius:8px; color:#fff; border:none; font-weight:700;">Reiniciar</button>
+        <button id="noMoreCancel" style="background:#eee; padding:.6em 1em; border-radius:8px; color:#333; border:none;">Soy aweonao</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/sw-register.js"></script>
+</body>
+</html>
