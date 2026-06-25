@@ -1,0 +1,27 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 34
+    namespace 'com.kdu.randompistas'
+
+    defaultConfig {
+        applicationId 'com.kdu.randompistas'
+        minSdk 19
+        targetSdk 34
+        versionCode 2
+        versionName '2.1'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}

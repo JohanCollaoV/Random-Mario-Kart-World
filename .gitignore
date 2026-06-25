@@ -2,3 +2,7 @@
 Thumbs.db
 *.log
 notes/
+android/.gradle/
+android/app/build/
+android/local.properties
+android/gradle/wrapper/gradle-wrapper.jar
