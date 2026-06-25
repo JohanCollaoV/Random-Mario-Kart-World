@@ -2,6 +2,16 @@
 
 App web progresiva (PWA) para sortear pistas de **Mario Kart World** al azar. Ideal para sesiones KDU donde no te decides que pista jugar.
 
+## Reglas de operacion
+
+- **Preguntar antes de modificar**: No edites archivos, crees nuevos, ni ejecutes comandos sin mi aprobacion explicita
+- **No regenerar APK automaticamente**: Solo compila la APK cuando yo lo pida explicitamente (ej: "genera la apk")
+- **No hacer git add/commit/push/merge sin preguntar**: Siempre pregunta antes de cualquier operacion de git. Solo yo decido cuando y que committear
+- **No instalar dependencias**: No instales paquetes npm, pip, apt, etc sin preguntar
+- **Explicar el plan primero**: Antes de cambios grandes, explica que vas a hacer y espera mi confirmacion
+- **Commits en espanol**: Los mensajes de commit deben ir en espanol. No es necesario traducir conceptos tecnicos, solo el mensaje en si
+
+
 ## Caracteristicas
 
 - **Sorteo aleatorio** con animacion tipo slot machine
