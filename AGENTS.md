@@ -6,9 +6,10 @@ App web progresiva (PWA) para sortear pistas de **Mario Kart World** al azar. Id
 
 - **Preguntar antes de modificar**: No edites archivos, crees nuevos, ni ejecutes comandos sin mi aprobacion explicita
 - **No regenerar APK automaticamente**: Solo compila la APK cuando yo lo pida explicitamente (ej: "genera la apk")
-- **No hacer git push ni merge sin preguntar**: Siempre pregunta antes de pushear o mergear ramas
+- **No hacer git add/commit/push/merge sin preguntar**: Siempre pregunta antes de cualquier operacion de git. Solo yo decido cuando y que committear
 - **No instalar dependencias**: No instales paquetes npm, pip, apt, etc sin preguntar
 - **Explicar el plan primero**: Antes de cambios grandes, explica que vas a hacer y espera mi confirmacion
+- **Commits en espanol**: Los mensajes de commit deben ir en espanol. No es necesario traducir conceptos tecnicos, solo el mensaje en si
 
 
 ## Caracteristicas
